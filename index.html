@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siya's Hair & Skin Clinic | Premium Aesthetic Treatments</title>
+    <meta name="description" content="Experience luxurious hair and skin treatments at Siya's Hair & Skin Clinic. Book clinical PRP, hydrafacials, acne therapy, and hair transplant consultations.">
+    <meta name="keywords" content="hair clinic, skin clinic, dermatologist, PRP treatment, hydrafacial, acne therapy, Siya's clinic">
+    <meta name="author" content="Siya's Hair & Skin Clinic">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SUCCESS BOOKING MODAL -->
+    <div id="success-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+        <div class="modal-card">
+            <div class="modal-success-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h3 class="modal-title">Booking Confirmed!</h3>
+            <p>Thank you, <strong id="receipt-name">Patient</strong>. Your appointment has been successfully scheduled.</p>
+            
+            <div style="background-color: var(--bg-secondary); width: 100%; padding: 1.2rem; border-radius: var(--border-radius-sm); text-align: left; font-size: 0.9rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.6rem;">
+                <p><strong>Treatment:</strong> <span id="receipt-service">Treatment Name</span></p>
+                <p><strong>Date:</strong> <span id="receipt-date">Date</span></p>
+                <p><strong>Time:</strong> <span id="receipt-time">Time</span></p>
+                <p><strong>Status:</strong> <span style="color: #27ae60; font-weight: 600;">Confirmed (Free Consultation)</span></p>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: var(--text-muted);">A confirmation SMS with direction details has been sent to your mobile number.</p>
+            <button id="close-modal" class="btn btn-primary" style="width: 100%;">Back to Website</button>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="header">
+        <div class="navbar-container">
+            <a href="#home" class="logo" id="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M12,5C14.76,5 17,5.9 17,7C17,8.1 14.76,9 12,9C9.24,9 7,8.1 7,7C7,5.9 9.24,5 12,5M12,13C7.58,13 4,14.79 4,17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17C20,14.79 16.42,13 12,13M12,15C14.76,15 17,15.9 17,17C17,18.1 14.76,19 12,19C9.24,19 7,18.1 7,17C7,15.9 9.24,15 12,15Z"/>
+                </svg>
+                Siya'S <span>HAIR & CLINIC</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#services" class="nav-link">Treatments</a></li>
+                    <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                    <li><a href="#why-us" class="nav-link">Why Us</a></li>
+                    <li><a href="#specialist" class="nav-link">Specialist</a></li>
+                    <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme" id="theme-toggle">
+                    <!-- Moon Icon (Dark Mode) -->
+                    <svg class="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <!-- Sun Icon (Light Mode) -->
+                    <svg class="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                
+                <a href="#booking" class="btn btn-primary" id="cta-book-header">Book Appointment</a>
+                
+                <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <div class="badge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        Most Trusted Clinic in the City
+                    </div>
+                    <h1 class="hero-title">Reveal Your True Glow, Restore Your <span>Confidence</span></h1>
+                    <p class="hero-description">Welcome to Siya's Hair & Skin Clinic. We combine medical-grade technology with expert dermatological care to give you healthy, glowing skin and thick, radiant hair.</p>
+                    <div class="hero-buttons">
+                        <a href="#booking" class="btn btn-primary" id="cta-book-hero">Book Free Consultation</a>
+                        <a href="#services" class="btn btn-secondary" id="cta-explore-hero">Explore Treatments</a>
+                    </div>
+                </div>
+                <div class="hero-image-container reveal">
+                    <div class="hero-img-wrapper">
+                        <img src="images/lobby.png" alt="Siya's Hair and Skin Clinic Reception Lobby" class="hero-img">
+                    </div>
+                    <!-- Decorative Floating Card -->
+                    <div class="floating-card">
+                        <div class="floating-card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5>ISO Certified Clinic</h5>
+                            <p>100% Sterile & FDA Approved Procedures</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10k+</h3>
+                    <p>Happy Patients</p>
+                </div>
+                <div class="stat-item">
+                    <h3>12+</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5★</h3>
+                    <p>Google Rating</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="services-section">
+            <div class="section-header reveal">
+                <div class="badge" style="align-self: center;">Our Services</div>
+                <h2 class="section-title">Clinical Treatments Tailored For <span>You</span></h2>
+                <p>Choose from our wide range of premium services targeting hair restoration, anti-aging, acne clearing, and skin glow rejuvenation.</p>
+            </div>
+
+            <!-- Tab Switchers -->
+            <div class="tabs-container reveal">
+                <button class="tab-btn active" data-tab="hair" id="tab-hair">Hair Restoration</button>
+                <button class="tab-btn" data-tab="skin" id="tab-skin">Skin & Aesthetics</button>
+            </div>
+
+            <!-- Hair Services Grid -->
+            <div id="hair-services" class="services-grid active">
+                <!-- PRP Card -->
+                <div class="service-card reveal">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/hair.png" alt="PRP Hair Treatment" class="service-card-img">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Platelet-Rich Plasma (PRP)</h3>
+                        <p class="service-card-description">Stimulate hair follicle growth naturally using micro-infusions of your own platelets. Ideal for treating hair thinning and early-stage baldness.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹3,500 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">60 Mins</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dandruff Treatment -->
+                <div class="service-card reveal">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/hair.png" alt="Clinical Dandruff Treatment" class="service-card-img" style="filter: hue-rotate(45deg);">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Scalp Detox & Anti-Dandruff</h3>
+                        <p class="service-card-description">Medical scalp exfoliation and deep-acting anti-fungal serums to clear stubborn dandruff, eliminate scalp itchiness, and regulate sebum.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹1,500 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">45 Mins</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hair Regrowth Laser -->
+                <div class="service-card reveal">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/hair.png" alt="Laser Hair Therapy" class="service-card-img" style="filter: hue-rotate(90deg);">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Laser Hair Regrowth Therapy</h3>
+                        <p class="service-card-description">Non-invasive Low-Level Laser Therapy (LLLT) designed to accelerate cell repair, improve scalp blood circulation, and strengthen weak hair roots.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹2,800 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">50 Mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skin Services Grid -->
+            <div id="skin-services" class="services-grid">
+                <!-- Hydrafacial Card -->
+                <div class="service-card">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/skin.png" alt="Premium Hydrafacial" class="service-card-img">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Premium Gold Hydrafacial</h3>
+                        <p class="service-card-description">Deep clinical cleansing, painless pore extraction, and customized serum vortex infusion containing 24k gold extracts for instant glow.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹4,500 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">75 Mins</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Acne Therapy -->
+                <div class="service-card">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/skin.png" alt="Acne Therapy" class="service-card-img" style="filter: hue-rotate(45deg);">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Clinical Acne Clear Therapy</h3>
+                        <p class="service-card-description">Custom chemical exfoliation, comedone extraction, and anti-bacterial light therapy designed to eliminate pimples, control oiliness, and fade marks.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹2,000 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">60 Mins</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skin Glow chemical peel -->
+                <div class="service-card">
+                    <div class="service-card-img-wrapper">
+                        <img src="images/skin.png" alt="Anti-Pigmentation Peel" class="service-card-img" style="filter: hue-rotate(90deg);">
+                    </div>
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Dermal Pigmentation Peels</h3>
+                        <p class="service-card-description">Advanced medical peels containing AHA/BHA complexes to lift melasma, dark spots, and sun tanning, revealing bright, evenly toned skin.</p>
+                        <div class="service-card-footer">
+                            <span class="service-price">₹2,500 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">/ session</span></span>
+                            <span class="service-duration">40 Mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKIN & HAIR QUIZ SECTION -->
+        <section id="quiz" class="quiz-section">
+            <div class="section-header reveal">
+                <div class="badge" style="align-self: center;">Skin &amp; Hair Quiz</div>
+                <h2 class="section-title">Find Your <span>Perfect Treatment</span></h2>
+                <p>Answer a few quick questions to get a personalized recommendation from Dr. Siya.</p>
+            </div>
+            <div class="quiz-container reveal">
+                <div class="quiz-card">
+                    <div id="quiz-question-container">
+                        <h4 id="quiz-question" style="font-size: 1.25rem;">Question 1 of 3: What is your primary concern?</h4>
+                        <div class="quiz-options" id="quiz-options">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                    <div id="quiz-result" style="display: none;">
+                        <h4 style="color: var(--accent); font-size: 1.2rem; font-weight: 600;">Recommended for You:</h4>
+                        <h3 id="recommended-treatment-title" style="margin: 0.5rem 0 1rem 0; font-size: 1.8rem; font-weight: 700;">PRP Hair Restoration</h3>
+                        <p id="recommended-treatment-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--text-secondary);">Based on your answers, this treatment will help stimulate hair growth and increase scalp density.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <a href="#booking" class="btn btn-primary" id="quiz-book-btn">Book This Session</a>
+                            <button class="btn btn-secondary" id="quiz-restart-btn">Restart Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US SECTION -->
+        <section id="why-us" class="why-us-section">
+            <div class="why-us-grid">
+                <div class="why-us-content reveal">
+                    <div class="badge">Why Choose Us</div>
+                    <h2 class="section-title">Clinical Excellence & <span>Personalized Care</span></h2>
+                    <p>We pride ourselves on providing the safest, most effective dermatological procedures in a luxurious, sterile environment.</p>
+                    
+                    <div class="why-us-features">
+                        <div class="why-us-feature-item">
+                            <div class="why-us-icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <div class="why-us-text">
+                                <h4>100% FDA Approved Procedures</h4>
+                                <p>We only use safe, clinically verified technologies and high-end certified skin and hair solutions.</p>
+                            </div>
+                        </div>
+
+                        <div class="why-us-feature-item">
+                            <div class="why-us-icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="why-us-text">
+                                <h4>Experienced Medical Team</h4>
+                                <p>All clinical procedures are overseen by senior certified doctors and dermatological specialists.</p>
+                            </div>
+                        </div>
+
+                        <div class="why-us-feature-item">
+                            <div class="why-us-icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <div class="why-us-text">
+                                <h4>Transparent & Fair Pricing</h4>
+                                <p>No hidden charges. Detailed breakdown of treatments is provided in pre-session counseling.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-us-image-collage reveal">
+                    <div class="collage-img-wrapper">
+                        <img src="images/skin.png" alt="Clinical Safety Standards" class="collage-img">
+                    </div>
+                    <!-- Collage floating badge -->
+                    <div class="collage-badge">
+                        <span>Safe</span>
+                        <p>&amp; Clean</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIALIST SECTION -->
+        <section id="specialist" class="doctor-section">
+            <div class="doctor-grid">
+                <div class="doctor-img-wrapper reveal">
+                    <img src="images/doctor.png" alt="Dr. Siya Desai - Chief Dermatologist" class="doctor-img">
+                </div>
+                <div class="doctor-content reveal">
+                    <div class="badge">Chief Dermatologist</div>
+                    <h2 class="section-title">Meet <span>Dr. Siya Desai</span></h2>
+                    <span class="doctor-degrees">MD - Dermatology, Venereology &amp; Leprosy | MBBS</span>
+                    <p class="doctor-bio">Dr. Siya Desai is a certified clinical dermatologist and aesthetic trichologist with over 12 years of core clinical experience. She specialized in advanced non-surgical hair restoration and medical acne and scarring solutions.</p>
+                    
+                    <ul class="doctor-qualifications">
+                        <li>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Gold Medalist in Aesthetic Dermatology (2014)
+                        </li>
+                        <li>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Member, Indian Association of Dermatologists (IADVL)
+                        </li>
+                        <li>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Trained in Advanced Scalp Micro-Needling &amp; PRP Techniques
+                        </li>
+                    </ul>
+
+                    <div class="doctor-socials">
+                        <a href="#" class="social-btn" aria-label="Follow Dr. Siya on Instagram">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Follow Dr. Siya on LinkedIn">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Subscribe to Dr. Siya's YouTube channel">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEFORE & AFTER SLIDER (TRANSFORMATIONS) SECTION -->
+        <section id="transformations" class="transformations-section">
+            <div class="section-header reveal">
+                <div class="badge" style="align-self: center;">Transformations</div>
+                <h2 class="section-title">Real Patients. <span>Real Results.</span></h2>
+                <p>Drag the slider to see the dramatic changes after our customized clinical sessions.</p>
+            </div>
+            <div class="slider-container reveal">
+                <div class="before-after-slider">
+                    <div class="img background-img">
+                        <img src="images/skin.png" alt="After Treatment">
+                        <span class="label after-label">After Treatment</span>
+                    </div>
+                    <div class="img foreground-img">
+                        <img src="images/skin.png" alt="Before Treatment" style="filter: saturate(0.5) contrast(0.85) brightness(0.8) sepia(0.15) blur(0.5px);">
+                        <span class="label before-label">Before Treatment</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="slider-bar" aria-label="Before after slide control">
+                    <div class="slider-button"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="section-header reveal" style="margin-bottom: 2rem;">
+                <div class="badge" style="align-self: center;">Testimonials</div>
+                <h2 class="section-title">What Our Patients <span>Say</span></h2>
+                <p>Read review ratings and stories of hair growth and skincare confidence restoration directly from our clients.</p>
+            </div>
+
+            <div class="testimonial-carousel-container reveal">
+                <!-- Navigation Buttons -->
+                <button class="carousel-nav-btn prev" aria-label="Previous Slide">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="carousel-nav-btn next" aria-label="Next Slide">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="testimonial-slider">
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide">
+                        <div class="stars">
+                            <!-- Star icon (repeat 5 times) -->
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                        </div>
+                        <p class="testimonial-text">"I was suffering from heavy hair thinning. After 4 sessions of PRP Hair Therapy here, my hair is thick, and the bald spots are gone. Dr. Siya's guidance is absolute gold!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">PS</div>
+                            <div class="testimonial-author-name">Pooja Sharma</div>
+                            <div class="testimonial-author-treatment">PRP Hair Restoration Patient</div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide">
+                        <div class="stars">
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                        </div>
+                        <p class="testimonial-text">"The Premium Gold Hydrafacial was amazing! It cleared all blackheads instantly and gave my skin a rich glow that lasted weeks. I love the relaxing vibe of the clinic."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">RP</div>
+                            <div class="testimonial-author-name">Rahul Patil</div>
+                            <div class="testimonial-author-treatment">Hydrafacial Patient</div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide">
+                        <div class="stars">
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                            <svg width="20" height="20" fill="currentColor"><polygon points="10 15 13 18 12 13 16 10 11 9 10 4 9 9 4 10 8 13 7 18"></polygon></svg>
+                        </div>
+                        <p class="testimonial-text">"My severe acne breakouts are finally under control. The customized clinical chemical peels worked wonders. Excellent doctors who explain every step clearly."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">SK</div>
+                            <div class="testimonial-author-name">Sneha Kulkarni</div>
+                            <div class="testimonial-author-treatment">Clinical Acne Treatment Patient</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Navigation Dots -->
+                <div class="carousel-dots"></div>
+            </div>
+        </section>
+
+        <!-- FAQ ACCORDION SECTION -->
+        <section id="faq" class="faq-section">
+            <div class="section-header reveal">
+                <div class="badge" style="align-self: center;">FAQ</div>
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                <p>Clear your doubts about our clinical skincare and hair restoration procedures.</p>
+            </div>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is the PRP Hair Therapy painful?</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>PRP is a minimally invasive procedure. We apply a medical-grade numbing cream to the scalp before treatment, so most patients feel only minor pressure or a tiny pinch. It is very tolerable.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How many sessions of Hydrafacial do I need for visible results?</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You will see a visible, glowing improvement in skin hydration and texture immediately after your very first session. For long-term health and maintenance, we recommend one session every 4 to 6 weeks.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Are the chemical skin peels safe for sensitive skin?</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. We use specialized, gentle botanical-derived peels for sensitive skin. Dr. Siya will conduct a patch test and skin check first to select the exact safe concentration for your skin type.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Are there any side effects of laser hair treatments?</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our Low-Level Laser Therapy (LLLT) is completely non-invasive and has zero side effects. You might experience very mild scalp warmth for an hour, but you can return to normal work immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING / APPOINTMENT SECTION -->
+        <section id="booking" class="booking-section">
+            <div class="booking-grid">
+                <div class="booking-info reveal">
+                    <div class="badge">Book Now</div>
+                    <h2 class="section-title">Schedule A <span>Consultation</span></h2>
+                    <p>Take the first step towards transforming your skin and hair health. Book a slot online, and our clinic desk will confirm details via Call/SMS immediately.</p>
+                    
+                    <ul class="booking-benefits-list">
+                        <li class="booking-benefit-item">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <div>
+                                <h5>Skip the Waiting Line</h5>
+                                <p>Pre-booked patients enjoy zero-waiting checks upon clinic arrival.</p>
+                            </div>
+                        </li>
+                        <li class="booking-benefit-item">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <div>
+                                <h5>Free Pre-Session Counseling</h5>
+                                <p>Get a free digital scalp or skin checkup in your first visit.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="booking-card reveal">
+                    <form id="booking-form" class="booking-form" novalidate>
+                        <div class="form-group">
+                            <label for="booking-name" class="form-label">Full Name</label>
+                            <input type="text" id="booking-name" class="form-input" placeholder="e.g. Siya Kumar" required>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="booking-phone" class="form-label">Mobile Number</label>
+                                <input type="tel" id="booking-phone" class="form-input" placeholder="e.g. 9876543210" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-email" class="form-label">Email Address (Optional)</label>
+                                <input type="email" id="booking-email" class="form-input" placeholder="e.g. Siya@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="booking-service" class="form-label">Select Specialty</label>
+                                <select id="booking-service" class="form-select" required>
+                                    <option value="" disabled selected>Select service type...</option>
+                                    <option value="hair">Hair Restoration</option>
+                                    <option value="skin">Skin &amp; Aesthetics</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-treatment" class="form-label">Specific Treatment</label>
+                                <select id="booking-treatment" class="form-select" required>
+                                    <option value="" disabled selected>Choose Specialty first...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="booking-date" class="form-label">Preferred Date</label>
+                                <input type="date" id="booking-date" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-time" class="form-label">Preferred Time</label>
+                                <input type="time" id="booking-time" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%; height: 50px;" id="booking-submit-btn">Confirm Appointment Booking</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#home" class="footer-logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" style="width: 28px; height: 28px;">
+                        <path d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M12,5C14.76,5 17,5.9 17,7C17,8.1 14.76,9 12,9C9.24,9 7,8.1 7,7C7,5.9 9.24,5 12,5M12,13C7.58,13 4,14.79 4,17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17C20,14.79 16.42,13 12,13M12,15C14.76,15 17,15.9 17,17C17,18.1 14.76,19 12,19C9.24,19 7,18.1 7,17C7,15.9 9.24,15 12,15Z"/>
+                    </svg>
+                    Siya'S <span>HAIR & CLINIC</span>
+                </a>
+                <p class="footer-description">A medical-grade skincare and advanced hair rejuvenation clinic. Restoring confidence through scientific techniques.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home" class="footer-link">Home</a></li>
+                    <li><a href="#services" class="footer-link">Services</a></li>
+                    <li><a href="#specialist" class="footer-link">Specialist</a></li>
+                    <li><a href="#booking" class="footer-link">Book Now</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Treatments</h4>
+                <ul class="footer-links">
+                    <li><a href="#services" class="footer-link">PRP Therapy</a></li>
+                    <li><a href="#services" class="footer-link">Gold Hydrafacial</a></li>
+                    <li><a href="#services" class="footer-link">Acne Treatment</a></li>
+                    <li><a href="#services" class="footer-link">Laser Regrowth</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Contact Us</h4>
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>+91 98765 43210</span>
+                    </li>
+                    <li class="contact-info-item">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>info@Siyasclinic.com</span>
+                    </li>
+                    <li class="contact-info-item">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>102, Gold Plaza, Main Road, Pune, Maharashtra - 411001</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Siya's Hair &amp; Skin Clinic. All Rights Reserved.</p>
+            <p>Designed with clinical precision.</p>
+        </div>
+    </footer>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+    
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210?text=Hi,%20I%20want%20to%20book%20an%20appointment%20at%20Siya's%20Clinic." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.774 9.774 0 0 0-6.979-2.88c-5.443 0-9.87 4.374-9.874 9.8a9.69 9.69 0 0 0 1.513 5.104l-.993 3.626 3.734-.969zm11.238-6.924c-.3-.15-1.772-.875-2.046-.975-.274-.1-.474-.15-.674.15-.2.3-.774.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.492-.893-.797-1.495-1.782-1.67-2.082-.175-.3-.018-.462.13-.61.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.493-.508-.674-.517-.175-.008-.375-.01-.575-.01s-.525.075-.8.375c-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.224 5.112 4.521.714.309 1.272.494 1.707.632.717.228 1.368.196 1.883.118.574-.087 1.772-.725 2.022-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/>
+        </svg>
+    </a>
+</body>
+</html>
